@@ -1,3 +1,6 @@
+Index · HTML
+Copiar
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -30,15 +33,11 @@
             --font-title: 'Playfair Display', serif;
             --font-body: 'Manrope', sans-serif;
 
-            /* Spacing tokens responsivos */
             --section-spacing: clamp(60px, 10vw, 120px);
             --container-padding: clamp(16px, 4vw, 24px);
             --grid-gap: clamp(30px, 6vw, 80px);
         }
 
-        /* ================================================
-           BASE & RESET
-        ================================================ */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
         html { scroll-behavior: smooth; scroll-padding-top: 90px; }
         body {
@@ -49,7 +48,6 @@
             overflow-x: hidden;
         }
         img { max-width: 100%; display: block; }
-
         h1, h2, h3, h4 { font-family: var(--font-title); font-weight: 700; color: #fff; line-height: 1.2; }
         h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 25px; }
         h2 { font-size: clamp(1.8rem, 4vw, 3.5rem); margin-bottom: 20px; }
@@ -59,10 +57,8 @@
         .text-rust  { color: var(--primary-rust); }
         .text-center { text-align: center; }
 
-        /* Container fluido */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--container-padding); width: 100%; }
 
-        /* Grid de 2 colunas: colapsa em 1 abaixo de 768px */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -94,7 +90,7 @@
         .btn i { margin-left: 10px; font-size: 1.1em; }
 
         /* ================================================
-           HEADER & MENU
+           HEADER
         ================================================ */
         header {
             padding: 16px 0; position: fixed; width: 100%; top: 0; z-index: 1000;
@@ -112,7 +108,6 @@
         }
         .nav-links a:hover { color: var(--primary-gold); }
 
-        /* Hamburger */
         .hamburger {
             display: none; flex-direction: column; gap: 5px;
             cursor: pointer; background: none; border: none; padding: 5px;
@@ -125,7 +120,6 @@
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* Menu mobile */
         .mobile-menu {
             display: none; position: fixed; top: 68px; left: 0; right: 0;
             background: rgba(8,5,5,0.97); backdrop-filter: blur(20px);
@@ -142,7 +136,7 @@
         .mobile-menu a:hover { color: var(--primary-gold); }
 
         /* ================================================
-           HERO
+           HERO — Desktop
         ================================================ */
         .hero {
             padding-top: clamp(120px, 15vw, 160px);
@@ -159,7 +153,12 @@
         .bullet-item i  { color: var(--primary-gold); font-size: 1.2rem; flex-shrink: 0; }
         .bullet-item span { font-weight: 600; font-size: clamp(0.88rem, 2vw, 1rem); color: #fff; }
 
-        .hero-img-box { position: relative; display: flex; justify-content: center; }
+        /* ---- Hero imagem (Desktop padrão) ---- */
+        .hero-img-box {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
         .hero-img {
             width: 100%; max-width: 550px;
             border-radius: 12px;
@@ -317,26 +316,44 @@
         .whatsapp-float:hover { transform: scale(1.1); }
 
         /* ================================================
-           BREAKPOINTS RESPONSIVOS
+           TABLET (481px – 900px)
         ================================================ */
-
-        /* === TABLET (481px – 900px) === */
         @media (max-width: 900px) {
-            /* Navegação */
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .btn.nav-cta { display: none; } /* esconde CTA do header em telas menores */
+            .btn.nav-cta { display: none; }
 
-            /* Grids colapsam para 1 coluna */
             .grid-2 { grid-template-columns: 1fr; }
             #historia .grid-2 { align-items: start; }
 
-            /* Hero */
-            .hero { min-height: auto; text-align: center; }
-            .hero > .container > div { padding-right: 0 !important; }
-            .hero-bullets { align-items: center; text-align: left; max-width: 480px; margin-left: auto; margin-right: auto; }
-            .hero-img-box { order: -1; margin-bottom: 30px; }
-            .hero-img { max-width: 400px; margin: 0 auto; }
+            /* Hero tablet: conteúdo primeiro, imagem decorativa abaixo */
+            .hero { min-height: auto; padding-bottom: 0; }
+            .hero > .container > div:first-child { padding-right: 0 !important; }
+
+            /* ---- Imagem hero no tablet: faixa larga, menor altura ---- */
+            .hero-img-box {
+                /* sai do grid e vira faixa de largura total */
+                grid-column: 1 / -1;
+                margin: 40px calc(-1 * var(--container-padding)) 0;
+                border-radius: 0;
+                overflow: hidden;
+                max-height: 340px;
+            }
+            .hero-img {
+                max-width: 100%;
+                width: 100%;
+                height: 340px;
+                object-fit: cover;
+                object-position: center 15%;
+                border-radius: 0;
+                box-shadow: none;
+                /* fade nas bordas laterais e na base */
+                -webkit-mask-image:
+                    linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, black 30%, black 70%, transparent 100%);
+                mask-image:
+                    linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, black 30%, black 70%, transparent 100%);
+                filter: contrast(108%) brightness(0.95);
+            }
 
             /* História */
             .history-img-container { height: clamp(280px, 50vw, 450px); margin-bottom: 0; order: -1; }
@@ -344,17 +361,55 @@
 
             /* Tabela filtro */
             .table-header { grid-template-columns: 1fr; }
-            .th-good { border-bottom: none; border-bottom: 1px solid rgba(56,161,105,0.1); }
+            .th-good { border-bottom: 1px solid rgba(56,161,105,0.1); }
             .th-bad  { border-top: 1px solid rgba(229,62,62,0.1); }
             .table-row { grid-template-columns: 1fr; }
             .td-good { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
             .td-bad  { border-top: none; }
         }
 
-        /* === MOBILE PEQUENO (≤ 480px) === */
+        /* ================================================
+           MOBILE (≤ 480px)
+        ================================================ */
         @media (max-width: 480px) {
-            .hero { padding-top: 100px; }
+            .hero { padding-top: 100px; padding-bottom: 0; }
+
+            /* Texto hero: centralizado e respirando bem */
+            .hero > .container > div:first-child {
+                text-align: center;
+                padding: 0 4px !important;
+            }
+            .hero-bullets {
+                align-items: stretch;
+                max-width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+            }
             .bullet-item { flex-direction: row; }
+
+            /* ---- Imagem hero no mobile: faixa curta, muito suave ---- */
+            .hero-img-box {
+                grid-column: 1 / -1;
+                margin: 30px calc(-1 * var(--container-padding)) 0;
+                border-radius: 0;
+                overflow: hidden;
+                max-height: 240px;
+            }
+            .hero-img {
+                max-width: 100%;
+                width: 100%;
+                height: 240px;
+                object-fit: cover;
+                object-position: center 10%;
+                border-radius: 0;
+                box-shadow: none;
+                -webkit-mask-image:
+                    linear-gradient(to bottom, transparent 0%, black 18%, black 65%, transparent 100%);
+                mask-image:
+                    linear-gradient(to bottom, transparent 0%, black 18%, black 65%, transparent 100%);
+                filter: contrast(105%) brightness(0.9) saturate(0.85);
+            }
+
             .btn { width: 100%; text-align: center; font-size: 0.78rem; padding: 16px 20px; white-space: normal; }
             .services-grid { grid-template-columns: 1fr; }
             .errors-grid   { grid-template-columns: 1fr; }
@@ -385,7 +440,6 @@
                 Agendar Diagnóstico
             </a>
 
-            <!-- Hamburger (visível só em mobile) -->
             <button class="hamburger" id="hamburger" aria-label="Abrir menu">
                 <span></span><span></span><span></span>
             </button>
@@ -394,16 +448,18 @@
 
     <!-- Menu mobile -->
     <nav class="mobile-menu" id="mobileMenu">
-        <a href="#historia"  onclick="closeMenu()">Trajetória</a>
-        <a href="#servicos"  onclick="closeMenu()">O que construímos</a>
-        <a href="#erros"     onclick="closeMenu()">O Erro</a>
-        <a href="#filtro"    onclick="closeMenu()">Perfil ideal</a>
+        <a href="#historia"    onclick="closeMenu()">Trajetória</a>
+        <a href="#servicos"    onclick="closeMenu()">O que construímos</a>
+        <a href="#erros"       onclick="closeMenu()">O Erro</a>
+        <a href="#filtro"      onclick="closeMenu()">Perfil ideal</a>
         <a href="#diagnostico" onclick="closeMenu()" style="color: var(--primary-gold);">Agendar Diagnóstico</a>
     </nav>
 
     <!-- ============ HERO ============ -->
     <section class="hero">
         <div class="container grid-2">
+
+            <!-- Conteúdo (sempre primeiro no DOM → sempre primeiro no mobile) -->
             <div class="reveal active" style="padding-right: 20px;">
                 <span class="text-gold" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; border-bottom: 1px solid var(--primary-gold); padding-bottom: 5px;">Para Médicos e Clínicas</span>
                 <h1 style="margin-top: 20px;">Especialista em Gestão de Tráfego Pago <span class="text-rust" style="font-style: italic;">para Clínicas</span></h1>
@@ -427,9 +483,12 @@
                     Agendar Diagnóstico Estratégico <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
+
+            <!-- Imagem (no desktop: coluna direita | no mobile/tablet: faixa após o texto) -->
             <div class="hero-img-box reveal">
                 <img src="fotoapresentacao.jpeg" alt="Catarina Nunes - Especialista" class="hero-img">
             </div>
+
         </div>
     </section>
 
@@ -601,7 +660,7 @@
         <div class="container reveal">
             <h2>Sua clínica pode continuar no modo improviso.<br><span class="text-rust" style="font-style: italic;">Ou pode crescer com método.</span></h2>
             <p>Nós não trabalhamos com volume de clientes, mas com <strong>profundidade de resultados</strong>. Por isso, nossas vagas para o atendimento de novas clínicas são estritamente limitadas.</p>
-            <a href="https://wa.me/551194261119?text=Ol%C3%A1%2C%20sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20minha%20cl%C3%ADnica." target="_blank" class="btn" style="font-size: clamp(0.85rem, 2vw, 1.1rem); padding: clamp(18px, 3vw, 25px) clamp(30px, 5vw, 50px);">
+            <a href="https://wa.me/5511942611119?text=Ol%C3%A1%2C%20sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20minha%20cl%C3%ADnica." target="_blank" class="btn" style="font-size: clamp(0.85rem, 2vw, 1.1rem); padding: clamp(18px, 3vw, 25px) clamp(30px, 5vw, 50px);">
                 AGENDAR DIAGNÓSTICO ESTRATÉGICO
             </a>
             <span class="subtext">Analisaremos sua estrutura atual sem custos.</span>
@@ -614,7 +673,7 @@
     </footer>
 
     <!-- WhatsApp float -->
-    <a href="https://wa.me/551194261119?text=Ol%C3%A1%2C%20sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20minha%20cl%C3%ADnica." target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/5511942611119?text=Ol%C3%A1%2C%20sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20minha%20cl%C3%ADnica." target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -630,8 +689,8 @@
         reveal();
 
         /* ---- Hamburger ---- */
-        const hamburger   = document.getElementById('hamburger');
-        const mobileMenu  = document.getElementById('mobileMenu');
+        const hamburger  = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
 
         hamburger.addEventListener('click', () => {
             const open = mobileMenu.classList.toggle('open');
@@ -645,7 +704,6 @@
             document.body.style.overflow = '';
         }
 
-        /* Fechar ao clicar fora */
         document.addEventListener('click', e => {
             if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
                 closeMenu();
