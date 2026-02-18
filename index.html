@@ -430,11 +430,26 @@
                 filter: contrast(107%) brightness(0.93);
             }
 
+            /* H1 menor para caber em 2 linhas */
+            h1 { font-size: clamp(1.65rem, 5.5vw, 2.4rem); }
+
             /* Grids outros */
             .grid-2 { grid-template-columns: 1fr; }
             #historia .grid-2 { align-items: start; }
-            .history-img-container { height: clamp(280px, 50vw, 450px); margin-bottom: 0; order: -1; }
-            .history-img-matched { object-position: center top; }
+            /* História mobile: foto com crop focado na pessoa, sem espaço branco */
+            .history-img-container {
+                height: clamp(300px, 75vw, 480px);
+                margin-bottom: 0;
+                order: -1;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .history-img-matched {
+                object-position: center 8%;
+                transform: scale(1.15);
+                transform-origin: center 20%;
+                filter: sepia(20%) contrast(115%) brightness(1.02);
+            }
 
             /* Tabela desktop → oculta; tabs → visíveis */
             .table-container { display: none; }
@@ -564,7 +579,7 @@
                 <img src="fotoProfissional.jpg" alt="Background Corporativo" class="history-img-matched">
             </div>
             <div class="history-content reveal">
-                <h2>De grandes operações para o <span class="text-gold">seu consultório!</span></h2>
+                <h2>De grandes operações para o <span class="text-rust" style="font-style: italic;">seu consultório!</span></h2>
                 <p>Na <strong>Shopee e Leroy Merlin</strong>, gerenciei mais de R$ 200 mil por mês em anúncios para gigantes como Cimed, Salon Line, Johnson & Johnson, entre outras.</p>
                 <p>Ali, aprendi uma verdade absoluta: o sucesso não depende de sorte, mas de estrutura.</p>
                 <p>Ao atender minha primeira cliente médica na CRN Growth percebi que o mercado de clínicas estava carente dessa seriedade. Decidi, então, me dedicar exclusivamente para atender somente Doutores e Doutoras.</p>
