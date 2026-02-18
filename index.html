@@ -1,3 +1,6 @@
+Index · HTML
+Copiar
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -191,16 +194,31 @@
             background: var(--bg-card);
             border-top: 1px solid rgba(255,255,255,0.02);
         }
-        .history-content p { font-size: clamp(0.95rem, 2vw, 1.15rem); margin-bottom: 20px; line-height: 1.8; color: #ccc; }
-        #historia .grid-2 { align-items: stretch; }
 
-        .history-img-container { height: 100%; display: flex; }
+        /* Desktop: 2 colunas — img esq / (título + texto) dir */
+        .history-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                "img  top"
+                "img  body";
+            gap: 0 var(--grid-gap);
+            align-items: start;
+        }
+        .history-top         { grid-area: top; }
+        .history-body        { grid-area: body; }
+        .history-img-container {
+            grid-area: img;
+            height: 100%; display: flex;
+        }
         .history-img-matched {
             width: 100%; height: 100%; object-fit: cover;
             border-radius: 12px;
             box-shadow: -30px 30px 0px rgba(166, 93, 67, 0.1);
             filter: sepia(30%) contrast(110%);
         }
+        .history-body p { font-size: clamp(0.95rem, 2vw, 1.15rem); margin-bottom: 20px; line-height: 1.8; color: #ccc; }
 
         /* ================================================
            SERVIÇOS
@@ -437,29 +455,33 @@
 
             /* Grids outros */
             .grid-2 { grid-template-columns: 1fr; }
-            #historia .grid-2 { align-items: start; }
+            #historia .history-grid { align-items: start; }
 
-            /* História mobile: mesmo efeito de sobreposição do hero */
-            .history-section {
-                padding-top: 0;
-                overflow: visible;
+            /* História mobile: mesmo padrão do hero — título → foto sobreposta → corpo */
+            .history-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                grid-template-areas:
+                    "top"
+                    "img"
+                    "body";
+                gap: 0;
             }
+            .history-top {
+                position: relative; z-index: 1;
+                padding-bottom: 0;
+            }
+            .history-top h2 { text-align: left; font-size: clamp(1.65rem, 5.5vw, 2.4rem); }
             .history-img-container {
                 height: clamp(340px, 80vw, 500px);
-                margin-bottom: 0;
-                margin-left: calc(-1 * var(--container-padding));
-                margin-right: calc(-1 * var(--container-padding));
-                margin-top: -60px;
-                order: -1;
+                margin: -55px calc(-1 * var(--container-padding)) 0;
                 border-radius: 0;
                 overflow: hidden;
-                position: relative;
-                z-index: 2;
+                position: relative; z-index: 2;
+                align-self: auto;
             }
             .history-img-matched {
                 object-position: center 35%;
-                transform: scale(1.0);
-                transform-origin: center center;
                 border-radius: 0;
                 box-shadow: 0 -30px 60px rgba(18,11,10,0.7);
                 -webkit-mask-image:
@@ -468,10 +490,10 @@
                     linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
                 filter: sepia(20%) contrast(112%) brightness(0.95);
             }
-            /* Conteúdo texto fica acima da foto */
-            .history-content { position: relative; z-index: 3; }
-            /* Título da história alinhado à esquerda como h1 do hero */
-            .history-content h2 { text-align: left; }
+            .history-body {
+                position: relative; z-index: 3;
+                padding-top: 10px;
+            }
 
             /* Tabela desktop → oculta; tabs → visíveis */
             .table-container { display: none; }
@@ -517,10 +539,10 @@
             .errors-grid   { grid-template-columns: 1fr; }
             .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 16px; right: 16px; }
             .tab-btn { font-size: 0.78rem; padding: 14px 8px; }
-            /* Foto história mobile — mesmo crop do tablet */
+            /* Foto história no mobile — ligeiramente menor */
             .history-img-container {
-                height: clamp(300px, 75vw, 440px);
-                margin-top: -50px;
+                height: clamp(290px, 72vw, 420px);
+                margin-top: -45px;
             }
         }
 
@@ -604,12 +626,23 @@
 
     <!-- ============ HISTÓRIA ============ -->
     <section class="history-section" id="historia">
-        <div class="container grid-2">
-            <div class="reveal history-img-container">
+        <div class="container history-grid">
+
+            <!-- Desktop: col esquerda = imagem | col direita = tudo -->
+            <!-- Mobile: título → foto → texto (igual ao hero) -->
+
+            <!-- Título (sempre aparece antes da foto no mobile) -->
+            <div class="history-top reveal">
+                <h2>De grandes operações para o <span class="text-rust" style="font-style: italic;">seu consultório!</span></h2>
+            </div>
+
+            <!-- Foto -->
+            <div class="history-img-container reveal">
                 <img src="fotoProfissional.jpg" alt="Background Corporativo" class="history-img-matched">
             </div>
-            <div class="history-content reveal">
-                <h2>De grandes operações para o <span class="text-rust" style="font-style: italic;">seu consultório!</span></h2>
+
+            <!-- Texto (bullets de texto + botão) -->
+            <div class="history-body reveal">
                 <p>Na <strong>Shopee e Leroy Merlin</strong>, gerenciei mais de R$ 200 mil por mês em anúncios para gigantes como Cimed, Salon Line, Johnson & Johnson, entre outras.</p>
                 <p>Ali, aprendi uma verdade absoluta: o sucesso não depende de sorte, mas de estrutura.</p>
                 <p>Ao atender minha primeira cliente médica na CRN Growth percebi que o mercado de clínicas estava carente dessa seriedade. Decidi, então, me dedicar exclusivamente para atender somente Doutores e Doutoras.</p>
@@ -618,6 +651,7 @@
                     Quero essa estrutura na minha clínica
                 </a>
             </div>
+
         </div>
     </section>
 
@@ -857,3 +891,5 @@
     </script>
 </body>
 </html>
+
+
