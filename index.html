@@ -438,20 +438,40 @@
             /* Grids outros */
             .grid-2 { grid-template-columns: 1fr; }
             #historia .grid-2 { align-items: start; }
-            /* História mobile: mostrar pessoa completa com notebook, sem zoom exagerado */
+
+            /* História mobile: mesmo efeito de sobreposição do hero */
+            .history-section {
+                padding-top: 0;
+                overflow: visible;
+            }
             .history-img-container {
                 height: clamp(340px, 80vw, 500px);
                 margin-bottom: 0;
+                margin-left: calc(-1 * var(--container-padding));
+                margin-right: calc(-1 * var(--container-padding));
+                margin-top: -60px;
                 order: -1;
-                border-radius: 10px;
+                border-radius: 0;
                 overflow: hidden;
+                position: relative;
+                z-index: 2;
             }
             .history-img-matched {
                 object-position: center 35%;
                 transform: scale(1.0);
                 transform-origin: center center;
-                filter: sepia(20%) contrast(112%) brightness(1.0);
+                border-radius: 0;
+                box-shadow: 0 -30px 60px rgba(18,11,10,0.7);
+                -webkit-mask-image:
+                    linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
+                mask-image:
+                    linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
+                filter: sepia(20%) contrast(112%) brightness(0.95);
             }
+            /* Conteúdo texto fica acima da foto */
+            .history-content { position: relative; z-index: 3; }
+            /* Título da história alinhado à esquerda como h1 do hero */
+            .history-content h2 { text-align: left; }
 
             /* Tabela desktop → oculta; tabs → visíveis */
             .table-container { display: none; }
@@ -496,8 +516,12 @@
             .services-grid { grid-template-columns: 1fr; }
             .errors-grid   { grid-template-columns: 1fr; }
             .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 16px; right: 16px; }
-
             .tab-btn { font-size: 0.78rem; padding: 14px 8px; }
+            /* Foto história mobile — mesmo crop do tablet */
+            .history-img-container {
+                height: clamp(300px, 75vw, 440px);
+                margin-top: -50px;
+            }
         }
 
         /* === DESKTOP GRANDE (≥ 1400px) === */
