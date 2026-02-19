@@ -9,565 +9,185 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
-          crossorigin="anonymous" 
-          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ================================================
-           DESIGN SYSTEM CRN
-        ================================================ */
+        /* --- DESIGN SYSTEM CRN --- */
         :root {
             --bg-deep: #080505;
             --bg-card: #120b0a;
-            --bg-lighter: #1c1210;
+            --bg-lighter: #1c1210;     
+            
             --primary-rust: #A65D43;
             --primary-gold: #D4B996;
             --grad-premium: linear-gradient(135deg, var(--primary-rust), #8a4a33);
+            
             --text-white: #F5F2F0;
             --text-gray: #B0A09C;
             --success-green: #38a169;
             --danger-red: #e53e3e;
             --whatsapp-green: #25D366;
+            
             --font-title: 'Playfair Display', serif;
             --font-body: 'Manrope', sans-serif;
-
-            --section-spacing: clamp(60px, 10vw, 120px);
-            --container-padding: clamp(16px, 4vw, 24px);
-            --grid-gap: clamp(30px, 6vw, 80px);
+            --section-spacing: 120px;
         }
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-white);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        img { max-width: 100%; display: block; }
+        /* --- BASE & RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; } 
+        
+        body { background-color: var(--bg-deep); color: var(--text-white); font-family: var(--font-body); line-height: 1.6; overflow-x: hidden; }
+
         h1, h2, h3, h4 { font-family: var(--font-title); font-weight: 700; color: #fff; line-height: 1.2; }
-        h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 25px; }
-        h2 { font-size: clamp(1.8rem, 4vw, 3.5rem); margin-bottom: 20px; }
-        p  { color: var(--text-gray); font-size: clamp(0.95rem, 2vw, 1.1rem); margin-bottom: 25px; font-weight: 300; }
-
-        .text-gold  { color: var(--primary-gold); font-style: italic; font-weight: 400; }
-        .text-rust  { color: var(--primary-rust); }
+        h1 { font-size: clamp(2.2rem, 5vw, 4rem); margin-bottom: 25px; }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 20px; }
+        p { color: var(--text-gray); font-size: 1.1rem; margin-bottom: 25px; font-weight: 300; }
+        
+        .text-gold { color: var(--primary-gold); font-style: italic; font-weight: 400; }
+        .text-rust { color: var(--primary-rust); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
         .text-center { text-align: center; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--container-padding); width: 100%; }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--grid-gap);
-            align-items: center;
-        }
-
-        /* ================================================
-           REVEAL ANIMATION
-        ================================================ */
+        /* --- REVEAL ANIMATION --- */
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* ================================================
-           BOTÕES
-        ================================================ */
+        /* --- BOTÕES --- */
         .btn {
             display: inline-flex; align-items: center; justify-content: center;
-            padding: clamp(14px, 2vw, 18px) clamp(24px, 4vw, 40px);
-            background: var(--primary-rust); color: white;
+            padding: 18px 40px; background: var(--primary-rust); color: white;
             border-radius: 4px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 1.5px; text-decoration: none; transition: 0.4s;
-            border: 1px solid transparent;
-            font-size: clamp(0.75rem, 1.5vw, 0.85rem);
-            cursor: pointer; box-shadow: 0 4px 15px rgba(166, 93, 67, 0.2);
-            margin-top: 20px; white-space: nowrap;
+            letter-spacing: 1px; text-decoration: none; transition: 0.4s;
+            border: 1px solid transparent; font-size: 0.85rem; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(166, 93, 67, 0.2); margin-top: 20px;
         }
         .btn:hover { background: #8a4a33; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(166, 93, 67, 0.4); }
         .btn i { margin-left: 10px; font-size: 1.1em; }
 
-        /* ================================================
-           HEADER
-        ================================================ */
-        header {
-            padding: 16px 0; position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: rgba(8, 5, 5, 0.92); backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .nav-flex { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-        .logo-img { height: clamp(34px, 5vw, 45px); width: auto; }
-
-        .nav-links { display: flex; gap: clamp(16px, 2.5vw, 30px); }
-        .nav-links a {
-            color: var(--text-gray); text-decoration: none;
-            font-size: clamp(0.75rem, 1.2vw, 0.9rem);
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-        }
+        /* --- HEADER & MENU --- */
+        header { padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: rgba(8, 5, 5, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo-img { height: 40px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-gray); text-decoration: none; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary-gold); }
 
-        .hamburger {
-            display: none; flex-direction: column; gap: 5px;
-            cursor: pointer; background: none; border: none; padding: 5px;
-        }
-        .hamburger span {
-            display: block; width: 24px; height: 2px;
-            background: var(--primary-gold); border-radius: 2px; transition: 0.3s;
-        }
-        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        .mobile-menu {
-            display: none; position: fixed; top: 68px; left: 0; right: 0;
-            background: rgba(8,5,5,0.97); backdrop-filter: blur(20px);
-            padding: 30px var(--container-padding);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            flex-direction: column; gap: 20px; z-index: 999;
-        }
-        .mobile-menu.open { display: flex; }
-        .mobile-menu a {
-            color: var(--text-gray); text-decoration: none; font-size: 1rem;
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
-            padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .mobile-menu a:hover { color: var(--primary-gold); }
-
-        /* ================================================
-           HERO — Desktop (grid 3 áreas: top | img, bottom | img)
-        ================================================ */
-        .hero {
-            padding-top: clamp(120px, 15vw, 160px);
-            padding-bottom: clamp(60px, 8vw, 100px);
-            min-height: 95vh; display: flex; align-items: center;
-            background: radial-gradient(circle at 70% 30%, #1f100d 0%, var(--bg-deep) 70%);
-        }
-
-        /* Substitui o .grid-2 genérico no hero */
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto 1fr;
-            grid-template-areas:
-                "top  img"
-                "bot  img";
-            gap: 0 var(--grid-gap);
-            align-items: start;
-            width: 100%;
-        }
-        .hero-top { grid-area: top; padding-right: 20px; }
-        .hero-bot { grid-area: bot; padding-right: 20px; }
-        .hero-img-box {
-            grid-area: img;
-            display: flex;
-            justify-content: center;
-            align-self: stretch;
-        }
-
+        /* --- PAGE 1: HERO --- */
+        .hero { padding-top: 160px; padding-bottom: 100px; min-height: 90vh; display: flex; align-items: center; background: radial-gradient(circle at 70% 30%, #1f100d 0%, var(--bg-deep) 70%); }
         .hero-bullets { margin: 30px 0; display: flex; flex-direction: column; gap: 15px; }
-        .bullet-item {
-            display: flex; align-items: center; gap: 15px;
-            background: rgba(255,255,255,0.03); padding: 15px 20px;
-            border-radius: 6px; border-left: 3px solid var(--primary-gold);
-        }
-        .bullet-item i  { color: var(--primary-gold); font-size: 1.2rem; flex-shrink: 0; }
-        .bullet-item span { font-weight: 600; font-size: clamp(0.88rem, 2vw, 1rem); color: #fff; }
+        .bullet-item { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); padding: 15px 20px; border-radius: 6px; border-left: 3px solid var(--primary-gold); }
+        .bullet-item i { color: var(--primary-gold); font-size: 1.2rem; }
+        .bullet-item span { font-weight: 600; font-size: 0.95rem; color: #fff; }
+        .hero-img-box { position: relative; display: flex; justify-content: center; }
+        .hero-img { width: 100%; max-width: 550px; border-radius: 12px; box-shadow: -20px 20px 60px rgba(0,0,0,0.5); filter: contrast(110%); -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%); mask-image: linear-gradient(to bottom, black 85%, transparent 100%); }
 
-        /* ---- Hero imagem (Desktop padrão) ---- */
-        .hero-img {
-            width: 100%; max-width: 550px;
-            border-radius: 12px;
-            box-shadow: -20px 20px 60px rgba(0,0,0,0.5);
-            filter: contrast(110%);
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            object-fit: cover;
-        }
+        /* --- PAGE 2: HISTÓRIA --- */
+        .history-section { padding: var(--section-spacing) 0; background: var(--bg-card); border-top: 1px solid rgba(255,255,255,0.02); }
+        .history-content p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.8; color: #ccc; }
+        #historia .grid-2 { align-items: stretch; } 
+        .history-img-container { height: 100%; display: flex; }
+        .history-img-matched { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: -30px 30px 0px rgba(166, 93, 67, 0.1); filter: sepia(30%) contrast(110%); }
 
-        /* ================================================
-           HISTÓRIA
-        ================================================ */
-        .history-section {
-            padding: var(--section-spacing) 0;
-            background: var(--bg-card);
-            border-top: 1px solid rgba(255,255,255,0.02);
-        }
-
-        /* Desktop: 2 colunas — img esq / (título + texto) dir */
-        .history-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto 1fr;
-            grid-template-areas:
-                "img  top"
-                "img  body";
-            gap: 0 var(--grid-gap);
-            align-items: start;
-        }
-        .history-top         { grid-area: top; }
-        .history-body        { grid-area: body; }
-        .history-img-container {
-            grid-area: img;
-            height: 100%; display: flex;
-        }
-        .history-img-matched {
-            width: 100%; height: 100%; object-fit: cover;
-            border-radius: 12px;
-            box-shadow: -30px 30px 0px rgba(166, 93, 67, 0.1);
-            filter: sepia(30%) contrast(110%);
-        }
-        .history-body p { font-size: clamp(0.95rem, 2vw, 1.15rem); margin-bottom: 20px; line-height: 1.8; color: #ccc; }
-
-        /* ================================================
-           SERVIÇOS
-        ================================================ */
+        /* --- PAGE 3: SERVIÇOS --- */
         .services-section { padding: var(--section-spacing) 0; }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-            gap: clamp(16px, 3vw, 30px);
-            margin-top: 60px;
-        }
-        .service-card {
-            background: var(--bg-lighter); padding: clamp(24px, 4vw, 40px) clamp(20px, 3vw, 30px);
-            border-radius: 8px; border-top: 2px solid #333; transition: 0.3s;
-        }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+        .service-card { background: var(--bg-lighter); padding: 40px 30px; border-radius: 8px; border-top: 2px solid #333; transition: 0.3s; }
         .service-card:hover { border-top-color: var(--primary-rust); transform: translateY(-5px); background: #221512; }
-        .service-icon {
-            width: 60px; height: 60px; background: rgba(212,185,150,0.1);
-            color: var(--primary-gold); border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 25px;
-        }
-        .service-card h4  { font-family: var(--font-body); font-size: clamp(1.1rem, 2vw, 1.3rem); margin-bottom: 15px; color: var(--primary-rust); }
-        .service-list     { list-style: none; }
-        .service-list li  { margin-bottom: 12px; display: flex; gap: 10px; font-size: 0.95rem; color: #bbb; align-items: flex-start; }
-        .service-list i   { color: var(--primary-gold); margin-top: 4px; font-size: 0.8rem; flex-shrink: 0; }
-        .service-note     { margin-top: 20px; font-size: 0.85rem; color: #888; font-style: italic; border-top: 1px solid #333; padding-top: 15px; }
+        .service-icon { width: 60px; height: 60px; background: rgba(212, 185, 150, 0.1); color: var(--primary-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 25px; }
+        .service-card h4 { font-family: var(--font-body); font-size: 1.3rem; margin-bottom: 15px; color: var(--primary-rust); }
+        .service-list { list-style: none; }
+        .service-list li { margin-bottom: 12px; display: flex; gap: 10px; font-size: 0.95rem; color: #bbb; align-items: flex-start;}
+        .service-list i { color: var(--primary-gold); margin-top: 4px; font-size: 0.8rem; }
+        .service-note { margin-top: 20px; font-size: 0.85rem; color: #888; font-style: italic; border-top: 1px solid #333; padding-top: 15px; }
 
-        /* ================================================
-           ERROS
-        ================================================ */
+        /* --- PAGE 4: O ERRO --- */
         .errors-section { padding: var(--section-spacing) 0; background: var(--bg-card); }
-        .errors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-            gap: clamp(16px, 3vw, 30px);
-            margin-top: 50px; margin-bottom: 50px;
-        }
-        .error-card {
-            background: var(--bg-deep);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: clamp(20px, 3vw, 30px);
-            border-radius: 8px; position: relative; overflow: hidden;
-        }
-        .error-num {
-            position: absolute; top: -10px; right: 10px;
-            font-size: clamp(4rem, 8vw, 6rem);
-            font-family: var(--font-title); color: rgba(255,255,255,0.03);
-            font-weight: 700; line-height: 1; z-index: 0;
-        }
-        .error-card h4 {
-            font-family: var(--font-body);
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: #fff; margin-bottom: 10px;
-            position: relative; z-index: 1;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .error-card h4 i { color: var(--danger-red); flex-shrink: 0; }
-        .error-card p    { font-size: 0.95rem; margin: 0; position: relative; z-index: 1; }
+        .errors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 50px; margin-bottom: 50px;}
+        .error-card { background: var(--bg-deep); border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; position: relative; overflow: hidden; }
+        .error-num { position: absolute; top: -10px; right: 10px; font-size: 6rem; font-family: var(--font-title); color: rgba(255,255,255,0.03); font-weight: 700; line-height: 1; z-index: 0; }
+        .error-card h4 { font-family: var(--font-body); font-size: 1.2rem; color: #fff; margin-bottom: 10px; position: relative; z-index: 1; display: flex; align-items: center; gap: 10px;}
+        .error-card h4 i { color: var(--danger-red); }
+        .error-card p { font-size: 0.95rem; margin: 0; position: relative; z-index: 1; }
+        .highlight-box { background: var(--grad-premium); padding: 30px; border-radius: 8px; text-align: center; }
+        .highlight-box h3 { font-family: var(--font-body); font-size: 1.3rem; margin: 0; }
 
-        .highlight-box { background: var(--grad-premium); padding: clamp(20px, 4vw, 30px); border-radius: 8px; text-align: center; }
-        .highlight-box h3 { font-family: var(--font-body); font-size: clamp(1.1rem, 3vw, 1.5rem); margin: 0; }
-
-        /* ================================================
-           TABELA FILTRO — Desktop
-        ================================================ */
+        /* --- PAGE 5: TABELA FILTRO --- */
         .filter-section { padding: var(--section-spacing) 0; }
-        .table-container {
-            max-width: 900px; margin: 60px auto 0;
-            background: var(--bg-card); border-radius: 12px;
-            overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
-        }
+        .table-container { max-width: 900px; margin: 60px auto 0; background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
         .table-header { display: grid; grid-template-columns: 1fr 1fr; }
-        .th-good {
-            background: rgba(56,161,105,0.1); padding: clamp(16px, 3vw, 25px);
-            text-align: center; color: var(--success-green);
-            font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.2rem);
-            border-bottom: 1px solid rgba(56,161,105,0.2);
-        }
-        .th-bad {
-            background: rgba(229,62,62,0.05); padding: clamp(16px, 3vw, 25px);
-            text-align: center; color: var(--danger-red);
-            font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.2rem);
-            border-bottom: 1px solid rgba(229,62,62,0.1);
-        }
+        .th-good { background: rgba(56, 161, 105, 0.1); padding: 25px; text-align: center; color: var(--success-green); font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid rgba(56, 161, 105, 0.2);}
+        .th-bad { background: rgba(229, 62, 62, 0.05); padding: 25px; text-align: center; color: var(--danger-red); font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid rgba(229, 62, 62, 0.1);}
         .table-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .table-row:last-child { border-bottom: none; }
-        .td-good {
-            padding: clamp(16px, 2.5vw, 25px);
-            display: flex; align-items: center; gap: 15px;
-            color: #ddd; border-right: 1px solid rgba(255,255,255,0.05);
-            font-size: clamp(0.85rem, 1.8vw, 1rem);
-        }
-        .td-good i { color: var(--success-green); font-size: 1.1rem; flex-shrink: 0; }
-        .td-bad  {
-            padding: clamp(16px, 2.5vw, 25px);
-            display: flex; align-items: center; gap: 15px;
-            color: #888; font-size: clamp(0.85rem, 1.8vw, 1rem);
-        }
-        .td-bad i { color: var(--danger-red); font-size: 1.1rem; opacity: 0.7; flex-shrink: 0; }
+        .td-good { padding: 25px; display: flex; align-items: center; gap: 15px; color: #ddd; border-right: 1px solid rgba(255,255,255,0.05); }
+        .td-good i { color: var(--success-green); font-size: 1.2rem; min-width: 20px;}
+        .td-bad { padding: 25px; display: flex; align-items: center; gap: 15px; color: #888; }
+        .td-bad i { color: var(--danger-red); font-size: 1.2rem; opacity: 0.7; min-width: 20px;}
 
-        /* ---- Tabs Mobile/Tablet (ocultas no desktop) ---- */
-        .filter-tabs-wrapper { display: none; max-width: 600px; margin: 40px auto 0; }
+        /* --- PAGE 6: CTA FINAL --- */
+        .final-cta { padding: var(--section-spacing) 0; background: radial-gradient(circle at center, #1c1210 0%, var(--bg-deep) 100%); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        .final-cta h2 { font-size: clamp(2rem, 4vw, 4rem); max-width: 900px; margin: 0 auto 30px; }
+        .final-cta p { max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem; }
+        .subtext { display: block; margin-top: 15px; font-size: 0.8rem; color: var(--primary-gold); text-transform: uppercase; letter-spacing: 1px; }
 
-        .tab-buttons {
-            display: grid; grid-template-columns: 1fr 1fr;
-            border-radius: 10px 10px 0 0; overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08); border-bottom: none;
-        }
-        .tab-btn {
-            padding: 16px 12px; text-align: center;
-            font-weight: 700; font-size: 0.9rem; cursor: pointer;
-            transition: 0.3s; border: none; background: var(--bg-card);
-            text-transform: uppercase; letter-spacing: 1px;
-            position: relative;
-        }
-        .tab-btn.good {
-            color: #888;
-            border-right: 1px solid rgba(255,255,255,0.08);
-        }
-        .tab-btn.bad  { color: #888; }
-        .tab-btn.good.active {
-            background: rgba(56,161,105,0.15);
-            color: var(--success-green);
-            box-shadow: inset 0 -3px 0 var(--success-green);
-        }
-        .tab-btn.bad.active {
-            background: rgba(229,62,62,0.1);
-            color: var(--danger-red);
-            box-shadow: inset 0 -3px 0 var(--danger-red);
-        }
-
-        .tab-panels {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 0 0 10px 10px;
-            overflow: hidden;
-        }
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
-
-        .tab-item {
-            display: flex; align-items: flex-start; gap: 14px;
-            padding: 18px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.97rem; line-height: 1.5;
-            animation: fadeIn 0.3s ease;
-        }
-        .tab-item:last-child { border-bottom: none; }
-        .tab-item.good-item { color: #ddd; }
-        .tab-item.bad-item  { color: #888; }
-        .tab-item i { font-size: 1rem; flex-shrink: 0; margin-top: 3px; }
-        .tab-item.good-item i { color: var(--success-green); }
-        .tab-item.bad-item  i { color: var(--danger-red); opacity: 0.8; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ================================================
-           CTA FINAL
-        ================================================ */
-        .final-cta {
-            padding: var(--section-spacing) 0;
-            background: radial-gradient(circle at center, #1c1210 0%, var(--bg-deep) 100%);
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .final-cta h2 { font-size: clamp(1.8rem, 4vw, 4rem); max-width: 900px; margin: 0 auto 30px; }
-        .final-cta p  { max-width: 700px; margin: 0 auto 40px; font-size: clamp(1rem, 2vw, 1.2rem); }
-        .subtext {
-            display: block; margin-top: 15px; font-size: 0.85rem;
-            color: var(--primary-gold); text-transform: uppercase; letter-spacing: 1px;
-        }
-
-        /* ================================================
-           WHATSAPP FLOAT
-        ================================================ */
-        .whatsapp-float {
-            position: fixed; bottom: 24px; right: 24px;
-            background: var(--whatsapp-green); color: white;
-            width: 56px; height: 56px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 28px; z-index: 2000;
-            box-shadow: 0 0 20px rgba(37,211,102,0.3); transition: 0.3s;
-        }
+        /* --- FLOAT WHATSAPP --- */
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: var(--whatsapp-green); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 2000; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); transition: 0.3s; }
         .whatsapp-float:hover { transform: scale(1.1); }
 
-        /* ================================================
-           TABLET (481px – 900px)
-        ================================================ */
+        /* ======================================================= */
+        /* 📱 RESPONSIVIDADE EXTREMA (MOBILE OTIMIZADO)            */
+        /* ======================================================= */
         @media (max-width: 900px) {
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .btn.nav-cta { display: none; }
+            :root { --section-spacing: 80px; } 
+            
+            .nav-links { display: none; } 
+            header .btn { padding: 10px 15px; font-size: 0.7rem; margin-top: 0; }
+            
+            .grid-2, .errors-grid { grid-template-columns: 1fr; gap: 40px; }
+            
+            /* HERO: Foto menorzinha, texto subindo na tela */
+            .hero { padding-top: 100px; padding-bottom: 40px; text-align: center; }
+            .hero-img-box { order: -1; margin-bottom: 0px; } 
+            .hero-img { max-width: 220px; -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
+            .hero h1 { font-size: 1.8rem; margin-top: 10px; line-height: 1.2; } 
+            .hero-bullets { text-align: left; margin: 15px 0; } 
+            .hero .btn { width: 100%; font-size: 0.8rem; padding: 18px 10px; }
 
-            /* Hero — 1 coluna, 3 áreas empilhadas */
-            .hero { min-height: auto; padding-bottom: 0; }
-            .hero-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto;
-                grid-template-areas:
-                    "top"
-                    "img"
-                    "bot";
-                gap: 0;
-            }
-            .hero-top { padding-right: 0; padding-bottom: 0; position: relative; z-index: 1; }
-            .hero-bot { padding-right: 0; padding-top: 0; padding-bottom: 40px; position: relative; z-index: 3; }
+            /* HISTÓRIA */
+            .history-img-container { height: 350px; margin-bottom: 20px; }
+            .history-content { text-align: center; }
+            .history-content .btn { width: 100%; }
 
-            /* ---- Imagem hero tablet: sobrepõe o título com efeito cinematográfico ---- */
-            .hero-img-box {
-                margin: -60px calc(-1 * var(--container-padding)) 0;
-                overflow: visible;
-                max-height: none;
-                align-self: auto;
-                position: relative;
-                z-index: 2;
-            }
-            .hero-img {
-                max-width: 100%;
-                width: 100%;
-                height: 420px;
-                object-fit: cover;
-                object-position: center 18%;
-                border-radius: 0;
-                box-shadow: 0 -30px 60px rgba(8,5,5,0.6);
-                -webkit-mask-image:
-                    linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
-                mask-image:
-                    linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%);
-                filter: contrast(108%) brightness(0.95);
-            }
+            /* ERROS */
+            .error-card { padding: 25px 20px; }
+            .highlight-box .btn { width: 100%; }
 
-            /* H1 menor para caber em 2 linhas */
-            h1 { font-size: clamp(1.65rem, 5.5vw, 2.4rem); }
+            /* TABELA DE QUALIFICAÇÃO */
+            .table-container { background: transparent; border: none; overflow: visible; margin-top: 40px;}
+            .table-header { display: none; }
+            .table-row { grid-template-columns: 1fr; gap: 15px; border: none; margin-bottom: 25px; }
+            
+            .td-good, .td-bad { border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; background: var(--bg-card); flex-direction: column; align-items: flex-start; gap: 10px; padding: 25px 20px;}
+            .td-good { border-top: 4px solid var(--success-green); }
+            .td-bad { border-top: 4px solid var(--danger-red); }
+            
+            .td-good::before { content: "✅ A CRN É PARA VOCÊ SE:"; display: block; font-size: 0.75rem; color: var(--success-green); font-weight: 700; margin-bottom: 5px; }
+            .td-bad::before { content: "❌ A CRN NÃO É PARA VOCÊ SE:"; display: block; font-size: 0.75rem; color: var(--danger-red); font-weight: 700; margin-bottom: 5px; }
 
-            /* Grids outros */
-            .grid-2 { grid-template-columns: 1fr; }
-            #historia .history-grid { align-items: start; }
-
-            /* História mobile: foto primeiro → título emerge de baixo → corpo */
-            .history-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto;
-                grid-template-areas:
-                    "img"
-                    "top"
-                    "body";
-                gap: 0;
-            }
-            .history-img-container {
-                height: clamp(420px, 100vw, 560px);
-                margin: 0 calc(-1 * var(--container-padding));
-                border-radius: 0;
-                overflow: hidden;
-                position: relative; z-index: 1;
-                align-self: auto;
-            }
-            .history-img-matched {
-                object-position: 60% 28%;
-                border-radius: 0;
-                box-shadow: none;
-                -webkit-mask-image:
-                    linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
-                mask-image:
-                    linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
-                filter: sepia(15%) contrast(112%) brightness(0.92);
-            }
-            .history-top {
-                position: relative; z-index: 2;
-                margin-top: -70px;
-                padding-top: 0;
-                /* gradiente escuro sobe por baixo da foto para fundir título */
-                background: linear-gradient(to bottom, transparent 0%, var(--bg-card) 40%);
-                padding-bottom: 4px;
-            }
-            .history-top h2 {
-                text-align: center;
-                font-size: clamp(1.65rem, 5.5vw, 2.4rem);
-                padding-top: 30px;
-            }
-            .history-body {
-                position: relative; z-index: 3;
-                padding-top: 0;
-            }
-
-            /* Tabela desktop → oculta; tabs → visíveis */
-            .table-container { display: none; }
-            .filter-tabs-wrapper { display: block; }
-        }
-
-        /* ================================================
-           MOBILE (≤ 480px)
-        ================================================ */
-        @media (max-width: 480px) {
-            .hero { padding-top: 100px; }
-
-            .hero-top { text-align: center; }
-            .hero-bot { text-align: center; padding-bottom: 0; }
-            .hero-bullets {
-                align-items: stretch;
-                text-align: left;
-                margin-left: 0; margin-right: 0;
-            }
-            .bullet-item { flex-direction: row; }
-
-            /* ---- Imagem hero mobile: sobreposição maior, mais pessoa visível ---- */
-            .hero-img-box {
-                margin: -50px calc(-1 * var(--container-padding)) 0;
-                max-height: none;
-                overflow: visible;
-                position: relative;
-                z-index: 2;
-            }
-            .hero-img {
-                height: 360px;
-                object-position: center 18%;
-                box-shadow: 0 -25px 50px rgba(8,5,5,0.7);
-                -webkit-mask-image:
-                    linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%);
-                mask-image:
-                    linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%);
-                filter: contrast(106%) brightness(0.9) saturate(0.95);
-            }
-
-            .btn { width: 100%; text-align: center; font-size: 0.78rem; padding: 16px 20px; white-space: normal; }
-            .services-grid { grid-template-columns: 1fr; }
-            .errors-grid   { grid-template-columns: 1fr; }
-            .whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 16px; right: 16px; }
-            .tab-btn { font-size: 0.78rem; padding: 14px 8px; }
-            /* Foto história no mobile — ligeiramente menor */
-            .history-img-container {
-                height: clamp(340px, 88vw, 480px);
-            }
-            .history-top { margin-top: -60px; }
-        }
-
-        /* === DESKTOP GRANDE (≥ 1400px) === */
-        @media (min-width: 1400px) {
-            :root { --container-padding: 40px; }
+            /* CTA FINAL */
+            .final-cta { padding: 80px 0; }
+            .final-cta .btn { width: 100%; padding: 20px 10px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============ HEADER ============ -->
     <header>
         <div class="container nav-flex">
             <img src="logo.jpg" alt="CRN Growth" class="logo-img">
-
+            
             <nav class="nav-links">
                 <a href="#historia">Trajetória</a>
                 <a href="#servicos">O que construímos</a>
@@ -575,42 +195,18 @@
                 <a href="#filtro">Perfil ideal</a>
             </nav>
 
-            <a href="#diagnostico" class="btn nav-cta" style="padding: 10px 25px; font-size: 0.75rem; margin-top: 0; background: transparent; border: 1px solid var(--primary-gold); color: var(--primary-gold);">
+            <a href="#diagnostico" class="btn" style="background: transparent; border: 1px solid var(--primary-gold); color: var(--primary-gold);">
                 Agendar Diagnóstico
             </a>
-
-            <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-                <span></span><span></span><span></span>
-            </button>
         </div>
     </header>
 
-    <!-- Menu mobile -->
-    <nav class="mobile-menu" id="mobileMenu">
-        <a href="#historia"    onclick="closeMenu()">Trajetória</a>
-        <a href="#servicos"    onclick="closeMenu()">O que construímos</a>
-        <a href="#erros"       onclick="closeMenu()">O Erro</a>
-        <a href="#filtro"      onclick="closeMenu()">Perfil ideal</a>
-        <a href="#diagnostico" onclick="closeMenu()" style="color: var(--primary-gold);">Agendar Diagnóstico</a>
-    </nav>
-
-    <!-- ============ HERO ============ -->
     <section class="hero">
-        <div class="container hero-grid">
-
-            <!-- Área TOP: tag + título -->
-            <div class="hero-top reveal active">
-                <span class="text-gold" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; border-bottom: 1px solid var(--primary-gold); padding-bottom: 5px;">Para Médicos e Clínicas</span>
+        <div class="container grid-2">
+            <div class="reveal active" style="padding-right: 10px;">
+                <span class="text-gold" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem; border-bottom: 1px solid var(--primary-gold); padding-bottom: 5px;">Para Médicos e Clínicas</span>
                 <h1 style="margin-top: 20px;">Especialista em Gestão de Tráfego Pago <span class="text-rust" style="font-style: italic;">para Clínicas</span></h1>
-            </div>
-
-            <!-- Área IMG: foto (desktop → coluna direita; mobile → banner entre título e bullets) -->
-            <div class="hero-img-box reveal">
-                <img src="fotoapresentacao.jpeg" alt="Catarina Nunes - Especialista" class="hero-img">
-            </div>
-
-            <!-- Área BOT: bullets + CTA -->
-            <div class="hero-bot reveal active">
+                
                 <div class="hero-bullets">
                     <div class="bullet-item">
                         <i class="fas fa-calendar-check"></i>
@@ -618,53 +214,44 @@
                     </div>
                     <div class="bullet-item">
                         <i class="fas fa-chart-line"></i>
-                        <span>Gerenciamento de orçamento de mais de R$200k por mês</span>
+                        <span>Gerenciamento de +R$200k por mês</span>
                     </div>
                     <div class="bullet-item">
                         <i class="fas fa-user-md"></i>
-                        <span>Metodologia desenhada exclusivamente para converter leads em pacientes</span>
+                        <span>Método para converter leads em pacientes</span>
                     </div>
                 </div>
+
                 <a href="#diagnostico" class="btn">
-                    Agendar Diagnóstico Estratégico <i class="fab fa-whatsapp"></i>
+                    Agendar Diagnóstico Gratuito <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
-
+            <div class="hero-img-box reveal">
+                <img src="fotoapresentacao.jpeg" alt="Catarina Nunes - Especialista" class="hero-img">
+            </div>
         </div>
     </section>
 
-    <!-- ============ HISTÓRIA ============ -->
     <section class="history-section" id="historia">
-        <div class="container history-grid">
-
-            <!-- Desktop: col esquerda = imagem | col direita = tudo -->
-            <!-- Mobile: título → foto → texto (igual ao hero) -->
-
-            <!-- Título (sempre aparece antes da foto no mobile) -->
-            <div class="history-top reveal">
-                <h2>De grandes operações para o <span class="text-rust" style="font-style: italic;">seu consultório!</span></h2>
-            </div>
-
-            <!-- Foto -->
-            <div class="history-img-container reveal">
+        <div class="container grid-2">
+            <div class="reveal history-img-container">
                 <img src="fotoProfissional.jpg" alt="Background Corporativo" class="history-img-matched">
             </div>
-
-            <!-- Texto (bullets de texto + botão) -->
-            <div class="history-body reveal">
-                <p>Na <strong>Shopee e Leroy Merlin</strong>, gerenciei mais de R$ 200 mil por mês em anúncios para gigantes como Cimed, Salon Line, Johnson & Johnson, entre outras.</p>
+            <div class="history-content reveal">
+                <h2>De grandes operações para o <span class="text-gold">seu consultório!</span></h2>
+                
+                <p>Na <strong>Shopee e Leroy Merlin</strong>, gerenciei mais de R$ 200 mil por mês em anúncios para gigantes como Cimed, Salon Line e Johnson & Johnson.</p>
                 <p>Ali, aprendi uma verdade absoluta: o sucesso não depende de sorte, mas de estrutura.</p>
                 <p>Ao atender minha primeira cliente médica na CRN Growth percebi que o mercado de clínicas estava carente dessa seriedade. Decidi, então, me dedicar exclusivamente para atender somente Doutores e Doutoras.</p>
-                <p>Meu foco é trazer o rigor das multinacionais para o dia a dia da saúde. Porque no final do dia, marketing não é vaidade. <strong>É engrenagem de crescimento.</strong></p>
+                <p>Meu foco é trazer o rigor das multinacionais para a saúde. Porque no final do dia, marketing não é vaidade. <strong>É engrenagem de crescimento.</strong></p>
+                
                 <a href="#diagnostico" class="btn" style="background: transparent; border: 1px solid var(--primary-rust); color: #fff;">
-                    Quero essa estrutura na minha clínica
+                    Quero essa estrutura na clínica
                 </a>
             </div>
-
         </div>
     </section>
 
-    <!-- ============ SERVIÇOS ============ -->
     <section class="services-section" id="servicos">
         <div class="container reveal">
             <div class="text-center">
@@ -679,224 +266,206 @@
                     <ul class="service-list">
                         <li><i class="fas fa-check"></i> Meta Ads (Instagram e Facebook)</li>
                         <li><i class="fas fa-check"></i> Google Ads (Pesquisa e YouTube)</li>
-                        <li><i class="fas fa-check"></i> Estratégia de campanhas para captação de leads</li>
-                        <li><i class="fas fa-check"></i> Otimização contínua de performance</li>
+                        <li><i class="fas fa-check"></i> Campanhas para captação de leads</li>
                         <li><i class="fas fa-check"></i> Estrutura de funil para conversão</li>
                     </ul>
                 </div>
+
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
                     <h4>Landing Pages de Alta Conversão</h4>
                     <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Estrutura estratégica focada em conversão</li>
-                        <li><i class="fas fa-check"></i> Copy persuasiva (focada na dor/desejo)</li>
-                        <li><i class="fas fa-check"></i> Design estratégico e veloz (Mobile-first)</li>
-                        <li><i class="fas fa-check"></i> Integração com WhatsApp e CRM</li>
+                        <li><i class="fas fa-check"></i> Estrutura focada em conversão</li>
+                        <li><i class="fas fa-check"></i> Copy persuasiva (dor/desejo)</li>
+                        <li><i class="fas fa-check"></i> Design veloz (Mobile-first)</li>
+                        <li><i class="fas fa-check"></i> Integração com WhatsApp/CRM</li>
                     </ul>
                 </div>
+
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-map-marker-alt"></i></div>
                     <h4>Google Meu Negócio</h4>
                     <ul class="service-list">
                         <li><i class="fas fa-check"></i> Configuração completa do perfil</li>
-                        <li><i class="fas fa-check"></i> Otimização para aparecer no Google Maps</li>
+                        <li><i class="fas fa-check"></i> Otimização para Google Maps</li>
                         <li><i class="fas fa-check"></i> Estratégia para avaliações</li>
-                        <li><i class="fas fa-check"></i> Posicionamento local estratégico</li>
+                        <li><i class="fas fa-check"></i> Posicionamento local</li>
                     </ul>
-                    <div class="service-note">O Google Meu Negócio é essencial para clínicas que dependem de busca local.</div>
+                    <div class="service-note">Essencial para clínicas que dependem de busca local.</div>
                 </div>
+
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-code"></i></div>
                     <h4>Pixel e Tag (Rastreamento)</h4>
                     <ul class="service-list">
                         <li><i class="fas fa-check"></i> Instalação do Pixel Meta</li>
                         <li><i class="fas fa-check"></i> Configuração de eventos</li>
-                        <li><i class="fas fa-check"></i> Instalação de Tags Google (GA4, GTM)</li>
-                        <li><i class="fas fa-check"></i> Rastreamento completo de conversões</li>
+                        <li><i class="fas fa-check"></i> Instalação de Tags Google</li>
+                        <li><i class="fas fa-check"></i> Rastreamento de conversões</li>
                     </ul>
-                    <div class="service-note">Sem rastreamento, não existe escala com previsibilidade.</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-headset"></i></div>
-                    <h4>Estrutura de Atendimento</h4>
-                    <ul class="service-list">
-                        <li><i class="fas fa-check"></i> Estrutura de mensagem para WhatsApp</li>
-                        <li><i class="fas fa-check"></i> Roteiro de qualificação de leads</li>
-                        <li><i class="fas fa-check"></i> Ajustes estratégicos no processo comercial</li>
-                        <li><i class="fas fa-check"></i> Otimização de taxa de fechamento</li>
-                    </ul>
+                    <div class="service-note">Sem rastreamento, não existe escala previsível.</div>
                 </div>
             </div>
-
+            
             <div class="text-center" style="margin-top: 40px;">
                 <a href="#diagnostico" class="btn">Analisar meu cenário atual</a>
             </div>
         </div>
     </section>
 
-    <!-- ============ ERROS ============ -->
     <section class="errors-section" id="erros">
         <div class="container reveal">
             <div class="text-center">
                 <span class="text-gold" style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">O Gargalo do Mercado</span>
                 <h2>O erro que custa caro <br>ao seu <span class="text-rust" style="font-style: italic;">consultório.</span></h2>
-                <p style="max-width: 800px; margin: 0 auto;">A maioria das agências apenas "impulsiona posts". Mas o marketing na área da saúde trava por 4 motivos principais:</p>
+                <p style="max-width: 800px; margin: 0 auto;">O marketing na área da saúde trava por 4 motivos principais:</p>
             </div>
 
             <div class="errors-grid">
                 <div class="error-card">
                     <div class="error-num">01</div>
                     <h4><i class="fas fa-times-circle"></i> Dependência do Orgânico</h4>
-                    <p>Você vira refém dos algoritmos, torcendo para que um post viralize para conseguir preencher a agenda da semana.</p>
+                    <p>Virar refém dos algoritmos, torcendo para que um post viralize para preencher a agenda.</p>
                 </div>
                 <div class="error-card">
                     <div class="error-num">02</div>
                     <h4><i class="fas fa-times-circle"></i> Falta de Qualificação</h4>
-                    <p>Seu WhatsApp lota de curiosos perguntando apenas "Qual o valor?" e que nunca agendam a consulta.</p>
+                    <p>Seu WhatsApp lota de curiosos perguntando apenas "Qual o valor?" e nunca agendam.</p>
                 </div>
                 <div class="error-card">
                     <div class="error-num">03</div>
                     <h4><i class="fas fa-times-circle"></i> Abismo Comercial</h4>
-                    <p>O marketing até atrai as pessoas, mas a sua recepção/secretária não tem roteiro e não sabe como converter o lead.</p>
+                    <p>O marketing atrai as pessoas, mas a sua recepção não sabe como converter o lead.</p>
                 </div>
                 <div class="error-card">
                     <div class="error-num">04</div>
                     <h4><i class="fas fa-times-circle"></i> Falta de Funil</h4>
-                    <p>Você tenta vender procedimentos de alto ticket direto para quem ainda não confia em você ou na sua clínica.</p>
+                    <p>Tentar vender procedimentos de alto ticket direto para quem ainda não confia em você.</p>
                 </div>
             </div>
 
             <div class="highlight-box">
                 <h3>Nós resolvemos esses 4 pilares de uma só vez.</h3>
                 <a href="#diagnostico" class="btn" style="background: var(--bg-deep); color: #fff; margin-top: 20px;">
-                    Resolver o Marketing da Minha Clínica
+                    Resolver o Marketing da Clínica
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- ============ FILTRO ============ -->
     <section class="filter-section" id="filtro">
         <div class="container reveal">
             <div class="text-center">
                 <h2>Escolha o seu lado.</h2>
-                <p>Buscamos clínicas que estão prontas para o próximo nível.</p>
+                <p>Buscamos clínicas prontas para o próximo nível.</p>
             </div>
 
-            <!-- Tabela (visível apenas no desktop ≥ 901px) -->
             <div class="table-container">
                 <div class="table-header">
                     <div class="th-good">A CRN é para você se...</div>
                     <div class="th-bad">A CRN NÃO é para você se...</div>
                 </div>
+                
                 <div class="table-row">
-                    <div class="td-good"><i class="fas fa-check"></i> Você quer previsibilidade e lucro real no consultório.</div>
-                    <div class="td-bad"><i class="fas fa-times"></i> Você busca "milagres" da noite para o dia.</div>
+                    <div class="td-good">Você quer previsibilidade e lucro real no consultório.</div>
+                    <div class="td-bad">Você busca "milagres" da noite para o dia.</div>
                 </div>
                 <div class="table-row">
-                    <div class="td-good"><i class="fas fa-check"></i> Está pronta para organizar e melhorar seus processos internos.</div>
-                    <div class="td-bad"><i class="fas fa-times"></i> Acha que marketing se resume apenas a "post bonitinho".</div>
+                    <div class="td-good">Está pronta para organizar processos internos.</div>
+                    <div class="td-bad">Acha que marketing se resume apenas a "post bonitinho".</div>
                 </div>
                 <div class="table-row">
-                    <div class="td-good"><i class="fas fa-check"></i> Entende que tráfego pago é o combustível do crescimento do negócio.</div>
-                    <div class="td-bad"><i class="fas fa-times"></i> Não tem estrutura, nem intenção de ter, para atender novos pacientes.</div>
+                    <div class="td-good">Entende que tráfego pago é combustível do negócio.</div>
+                    <div class="td-bad">Não tem estrutura para atender novos pacientes.</div>
                 </div>
             </div>
-
-            <!-- Tabs interativas (visíveis apenas em mobile/tablet ≤ 900px) -->
-            <div class="filter-tabs-wrapper">
-                <div class="tab-buttons">
-                    <button class="tab-btn good active" onclick="switchTab('good')">
-                        <i class="fas fa-check-circle" style="margin-right:6px;"></i> É para você
-                    </button>
-                    <button class="tab-btn bad" onclick="switchTab('bad')">
-                        <i class="fas fa-times-circle" style="margin-right:6px;"></i> NÃO é para você
-                    </button>
-                </div>
-                <div class="tab-panels">
-                    <div class="tab-panel active" id="panel-good">
-                        <div class="tab-item good-item"><i class="fas fa-check"></i> Você quer previsibilidade e lucro real no consultório.</div>
-                        <div class="tab-item good-item"><i class="fas fa-check"></i> Está pronta para organizar e melhorar seus processos internos.</div>
-                        <div class="tab-item good-item"><i class="fas fa-check"></i> Entende que tráfego pago é o combustível do crescimento do negócio.</div>
-                    </div>
-                    <div class="tab-panel" id="panel-bad">
-                        <div class="tab-item bad-item"><i class="fas fa-times"></i> Você busca "milagres" da noite para o dia.</div>
-                        <div class="tab-item bad-item"><i class="fas fa-times"></i> Acha que marketing se resume apenas a "post bonitinho".</div>
-                        <div class="tab-item bad-item"><i class="fas fa-times"></i> Não tem estrutura, nem intenção de ter, para atender novos pacientes.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center" style="margin-top: 40px;">
-                <a href="#diagnostico" class="btn">Eu estou pronta para crescer</a>
+            
+            <div class="text-center" style="margin-top: 20px;">
+                 <a href="#diagnostico" class="btn">Estou pronta para crescer</a>
             </div>
         </div>
     </section>
 
-    <!-- ============ CTA FINAL ============ -->
     <section class="final-cta" id="diagnostico">
         <div class="container reveal">
-            <h2>Sua clínica pode continuar no modo improviso.<br><span class="text-rust" style="font-style: italic;">Ou pode crescer com método.</span></h2>
-            <p>Nós não trabalhamos com volume de clientes, mas com <strong>profundidade de resultados</strong>. Por isso, nossas vagas para o atendimento de novas clínicas são estritamente limitadas.</p>
-            <a href="https://wa.me/5511942611119?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20como%20a%20CRN%20Growth%20pode%20ajudar%20minha%20cl%C3%ADnica%20a%20atrair%20mais%20pacientes." target="_blank" class="btn" style="font-size: clamp(0.85rem, 2vw, 1.1rem); padding: clamp(18px, 3vw, 25px) clamp(30px, 5vw, 50px);">
+            <h2>Sua clínica pode continuar no improviso.<br><span class="text-rust" style="font-style: italic;">Ou pode crescer com método.</span></h2>
+            
+            <p>Nós não trabalhamos com volume de clientes, mas com <strong>profundidade de resultados</strong>. Nossas vagas são estritamente limitadas.</p>
+
+            <a href="https://wa.me/551194261119?text=Ol%C3%A1%2C%20sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20minha%20cl%C3%ADnica." target="_blank" class="btn" style="font-size: 1.1rem; padding: 25px 50px;">
                 AGENDAR DIAGNÓSTICO ESTRATÉGICO
             </a>
             <span class="subtext">Analisaremos sua estrutura atual sem custos.</span>
         </div>
     </section>
 
-    <!-- ============ FOOTER ============ -->
     <footer style="text-align: center; padding: 50px 0; border-top: 1px solid #222; font-size: 0.8rem; color: #555; background: var(--bg-deep);">
         <p>&copy; 2026 CRN Growth. Especialista em Clínicas. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- WhatsApp float -->
-    <a href="https://wa.me/5511942611119?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20como%20a%20CRN%20Growth%20pode%20ajudar%20minha%20cl%C3%ADnica%20a%20atrair%20mais%20pacientes." target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/551194261119?text=Ol%C3%A1%2C%20sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20minha%20cl%C3%ADnica." target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
-        /* ---- Tab switcher (filtro mobile) ---- */
-        function switchTab(which) {
-            // Botões
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.tab-btn.' + which).classList.add('active');
-            // Painéis
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            document.getElementById('panel-' + which).classList.add('active');
-        }
-
-        /* ---- Scroll reveal ---- */
+        window.addEventListener('scroll', reveal);
         function reveal() {
-            document.querySelectorAll('.reveal').forEach(el => {
-                const top = el.getBoundingClientRect().top;
-                if (top < window.innerHeight - 120) el.classList.add('active');
-            });
+            var reveals = document.querySelectorAll('.reveal');
+            for(var i = 0; i < reveals.length; i++){
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 120;
+                if(revealtop < windowheight - revealpoint){
+                    reveals[i].classList.add('active');
+                }
+            }
         }
-        window.addEventListener('scroll', reveal, { passive: true });
         reveal();
+    </script>
 
-        /* ---- Hamburger ---- */
-        const hamburger  = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        // 2. As chaves do seu "Cofre" (Chave Pública/Anon - Seguro para Front-end)
+        const supabaseUrl = 'https://pryatlgaekwqslwthliy.supabase.co';
+        const supabaseKey = 'sb_publishable_eBvPOLzLQHI_AsEWmFSIhg_c-NuSxFY';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        hamburger.addEventListener('click', () => {
-            const open = mobileMenu.classList.toggle('open');
-            hamburger.classList.toggle('active', open);
-            document.body.style.overflow = open ? 'hidden' : '';
-        });
+        // 3. A Função Espiã: Registra no banco e redireciona
+        async function trackClickAndRedirect(e, origemNome) {
+            e.preventDefault(); // Impede que o link abra imediatamente
+            const linkDestino = e.currentTarget.href; // Guarda o link do WhatsApp
 
-        function closeMenu() {
-            mobileMenu.classList.remove('open');
-            hamburger.classList.remove('active');
-            document.body.style.overflow = '';
+            try {
+                // Tenta injetar o dado no Supabase
+                await supabaseClient.from('leads').insert([
+                    { origem: origemNome, status: 'Novo' }
+                ]);
+            } catch (error) {
+                console.error("Erro no rastreamento interno:", error);
+            } finally {
+                // Deu certo ou deu erro, o paciente NUNCA pode ficar travado. 
+                // Então, mandamos ele para o WhatsApp logo em seguida.
+                window.open(linkDestino, '_blank');
+            }
         }
 
-        document.addEventListener('click', e => {
-            if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                closeMenu();
+        // 4. "Cola" o rastreador nos botões assim que a página carregar
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // Pega o botão grande final
+            const btnCtaFinal = document.querySelector('.final-cta a[href^="https://wa.me"]');
+            if (btnCtaFinal) {
+                btnCtaFinal.addEventListener('click', (e) => trackClickAndRedirect(e, 'Botão Agendar (Final)'));
+            }
+
+            // Pega o botão verde flutuante
+            const btnFlutuante = document.querySelector('.whatsapp-float');
+            if (btnFlutuante) {
+                btnFlutuante.addEventListener('click', (e) => trackClickAndRedirect(e, 'Botão Flutuante (WhatsApp)'));
             }
         });
     </script>
+
 </body>
 </html>
