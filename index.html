@@ -918,6 +918,8 @@
         async function trackClickAndRedirect(e, origemNome) {
             e.preventDefault();
             const linkDestino = e.currentTarget.href;
+            // Abre o WhatsApp IMEDIATAMENTE (antes dos awaits) para não bloquear no mobile
+            window.open(linkDestino, '_blank');
             try {
                 await supabaseClient.from('leads').insert([
                     { 
@@ -933,8 +935,6 @@
                 ]);
             } catch (error) {
                 console.error("Erro ao salvar lead:", error);
-            } finally {
-                window.open(linkDestino, '_blank');
             }
         }
         // 5. Aciona os espiões quando a página carregar
